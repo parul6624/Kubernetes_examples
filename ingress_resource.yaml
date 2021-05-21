@@ -1,0 +1,21 @@
+---
+apiVersion: extensions/v1
+kind: Ingress
+metadata:
+  name: ingress-fin-app
+  namespace: app-space
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /fin
+        backend:
+          serviceName: fin-service
+          servicePort: 8080
+      - path: /infra
+        backend:
+          serviceName: infra-service
+          servicePort: 8080
